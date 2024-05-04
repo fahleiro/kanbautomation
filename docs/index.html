@@ -7,18 +7,43 @@
 </head>
 <body>
     <h1>Hello, World!</h1>
-    <form>
+    <form id="kanbautomationForm">
         <label for="apiKey">API Key:</label><br>
         <input type="text" id="apiKey" name="apiKey" placeholder="Enter your API Key"><br>
         <label for="serverUrl">Server URL:</label><br>
         <input type="text" id="serverUrl" name="serverUrl" placeholder="Enter Server URL"><br>
         <label for="content">Content:</label><br>
-        <input type="text" id="content" name="content" placeholder="Enter Content"><br>
+        <textarea id="content" name="content" rows="10" placeholder="Enter Content"></textarea><br>
         <input type="submit" value="Submit">
     </form>
     <div>
         <label for="response">Response:</label>
         <div id="response"></div>
     </div>
+
+    <script>
+        document.getElementById("kanbautomationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const apiKey = document.getElementById("apiKey").value;
+            const serverUrl = document.getElementById("serverUrl").value;
+            const content = document.getElementById("content").value;
+
+            const configAxios = {
+                headers: {
+                    'apikey': apiKey,
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            axios.post(serverUrl, JSON.parse(content), configAxios)
+                .then(response => {
+                    document.getElementById("response").innerText = "Resposta da API: " + JSON.stringify(response.data);
+                })
+                .catch(error => {
+                    document.getElementById("response").innerText = "Erro ao fazer a solicitação: " + error.response.data;
+                });
+        });
+    </script>
 </body>
 </html>
