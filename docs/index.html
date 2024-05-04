@@ -6,7 +6,7 @@
     <title>Enviar para API</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
+<body>   
     <div class="container">
         <h2>Enviar para API</h2>
         <input type="text" id="apiUrl" placeholder="URL da API"><br>
@@ -14,7 +14,13 @@
         <button onclick="submitData()">Enviar</button>
         <div class="response" id="apiResponse"></div>
     </div>
-
+    <div class="container">
+        <h2>Enviar para API</h2>
+        <input type="text" id="apiUrl" placeholder="URL da API"><br>
+        <textarea id="apiData" placeholder="Conteúdo para enviar"></textarea><br>
+        <button onclick="submitData()">Enviar</button>
+        <div class="response" id="apiResponse"></div>
+    </div>
     <script src="scripts.js"></script>
 </body>
 </html>
