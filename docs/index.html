@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanbautomation</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 </head>
 <body>
     <h1>Hello, World!</h1>
@@ -27,16 +26,19 @@
         document.getElementById("kanbautomationForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            const apiKey = document.getElementById("apiKey").value;
             const serverUrl = document.getElementById("serverUrl").value;
             const content = document.getElementById("content").value;
+            const apiKey = document.getElementById("apiKey").value;
 
             const configAxios = {
                 headers: {
-                    'apikey': apiKey,
                     'Content-Type': 'application/json'
                 }
             };
+
+            if (apiKey) {
+                configAxios.headers.apiKey = apiKey;
+            }
 
             axios.post(serverUrl, JSON.parse(content), configAxios)
                 .then(response => {
