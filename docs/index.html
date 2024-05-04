@@ -3,51 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanbautomation</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Enviar para API</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <form id="kanbautomationForm">
-        <label for="apiKey">API Key:</label><br>
-        <input type="text" id="apiKey" name="apiKey" placeholder="Enter your API Key"><br>
-        <label for="serverUrl">Server URL:</label><br>
-        <input type="text" id="serverUrl" name="serverUrl" placeholder="Enter Server URL"><br>
-        <label for="content">Content:</label><br>
-        <textarea id="content" name="content" rows="10" placeholder="Enter Content"></textarea><br>
-        <input type="submit" value="Submit">
-    </form>
-    <div>
-        <label for="response">Response:</label>
-        <div id="response"></div>
+    <div class="container">
+        <h2>Enviar para API</h2>
+        <input type="text" id="apiUrl" placeholder="URL da API"><br>
+        <textarea id="apiData" placeholder="Conteúdo para enviar"></textarea><br>
+        <button onclick="submitData()">Enviar</button>
+        <div class="response" id="apiResponse"></div>
     </div>
 
     <script>
-        document.getElementById("kanbautomationForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+        // Função para enviar os dados para a API
+        function submitData() {
+            // Pegar os valores dos campos
+            var apiUrl = document.getElementById('apiUrl').value;
+            var apiData = document.getElementById('apiData').value;
 
-            const serverUrl = document.getElementById("serverUrl").value;
-            const content = document.getElementById("content").value;
-            const apiKey = document.getElementById("apiKey").value;
-
-            const configAxios = {
+            // Realizar a requisição para a API
+            fetch(apiUrl, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                }
-            };
-
-            if (apiKey) {
-                configAxios.headers.apiKey = apiKey;
-            }
-
-            axios.post(serverUrl, JSON.parse(content), configAxios)
-                .then(response => {
-                    document.getElementById("response").innerText = "Resposta da API: " + JSON.stringify(response.data);
-                })
-                .catch(error => {
-                    document.getElementById("response").innerText = "Erro ao fazer a solicitação: " + error.response.data;
-                });
-        });
+                },
+                body: apiData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Exibir a resposta da API na div de resposta
+                document.getElementById('apiResponse').innerText = JSON.stringify(data);
+            })
+            .catch(error => {
+                console.error('Erro ao enviar dados:', error);
+                document.getElementById('apiResponse').innerText = 'Erro ao enviar dados';
+            });
+        }
     </script>
 </body>
 </html>
