@@ -6,14 +6,33 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #f5f5f5; /* Alterando a cor de fundo para um tom mais claro */
+    position: relative; /* Adicionando isso para estabelecer um contexto de posicionamento para o contêiner do select */
+}
+
+.select-container {
+    position: absolute;
+    top: 10px; /* Define a posição no topo */
+    background-color: #fff; /* Cor de fundo */
+    padding: 10px 20px; /* Espaçamento interno */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    z-index: 1; /* Garante que esteja acima do contêiner principal */
+    border-radius: 7px;
+    width: 300px;
+}
+
+select{
+    width: 240px;
+    border-style: none;
+    border-bottom: 1px solid #999; /* Mudando a cor da borda do select */
 }
 
 .container {
     max-width: 400px;
     width: 100%;
+    margin-top: 50px; /* Adiciona margem no topo para evitar sobreposição */
     padding: 20px;
-    background-color: #fff;
+    background-color: #fafafa; /* Alterando a cor de fundo */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -23,7 +42,7 @@ textarea {
     width: 100%;
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd; /* Mudando a cor da borda */
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -37,7 +56,7 @@ button {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #0056b3; /* Alterando a cor de fundo */
     color: #fff;
     border: none;
     border-radius: 4px;
