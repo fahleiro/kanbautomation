@@ -10,6 +10,11 @@ body {
     position: relative; /* Adicionando isso para estabelecer um contexto de posicionamento para o contêiner do select */
 }
 
+#apiUrlSet{
+    border-style: none;
+    color: blue;
+}
+
 .select-container {
     position: absolute;
     top: 10px; /* Define a posição no topo */
@@ -28,6 +33,7 @@ select{
 }
 
 .container {
+    display: none; /* Oculta todos os contêineres por padrão */
     max-width: 400px;
     width: 100%;
     margin-top: 50px; /* Adiciona margem no topo para evitar sobreposição */

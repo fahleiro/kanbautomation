@@ -8,19 +8,42 @@
 </head>
 <body> 
     <div class="select-container">
-    <label for="service">Service</label>
-    <select name="service" id="service">
-        <option value="set_logged_time_card">SET LoggedTime Card</option>
-        <option value="get_logged_time_card">GET LoggedTime Card</option>
-    </select>
+        <label for="service">Service</label>
+        <select name="service" id="service" onchange="toggleContainer()">
+            <option value="set_logged_time_card" selected>SET LoggedTime Card</option>
+            <option value="get_logged_time_card">GET LoggedTime Card</option>
+        </select>
     </div>
     <div class="container" id="set_logged_time_card_container">
         <h2>SET LoggedTime Card</h2>
-        <input type="text" id="apiUrl" placeholder="URL da API"><br>
-        <textarea id="apiData" placeholder="Conteúdo para enviar"></textarea><br>
-        <button onclick="submitData()">Enviar</button>
-        <div class="response" id="apiResponse"></div>
+        <input type="text" id="apiUrlSet" placeholder="URL da API" value="https://kanbautomation-api.onrender.com" readonly><br>
+        <textarea id="apiDataSet" placeholder="Conteúdo para enviar"></textarea><br>
+        <button onclick="submitData('set')">Enviar</button>
+        <div class="response" id="apiResponseSet"></div>
+    </div>
+    <div class="container" id="get_logged_time_card_container">
+        <h2>GET LoggedTime Card</h2>
+        <input type="text" id="apiUrlSet" placeholder="URL da API" value="https://kanbautomation-api.onrender.com" readonly><br>
+        <textarea id="apiDataGet" placeholder="Conteúdo para enviar"></textarea><br>
+        <button onclick="submitData('get')">Enviar</button>
+        <div class="response" id="apiResponseGet"></div>
     </div>
     <script src="scripts.js"></script>
+    <script>
+        window.onload = function() {
+            document.getElementById("set_logged_time_card_container").style.display = "block";
+        }
+
+        function toggleContainer() {
+            var service = document.getElementById("service").value;
+            if (service === "set_logged_time_card") {
+                document.getElementById("set_logged_time_card_container").style.display = "block";
+                document.getElementById("get_logged_time_card_container").style.display = "none";
+            } else {
+                document.getElementById("set_logged_time_card_container").style.display = "none";
+                document.getElementById("get_logged_time_card_container").style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
